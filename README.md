@@ -7,9 +7,6 @@ Robert Downey Jr. and Elon Musk: https://www.youtube.com/watch?v=ftOwCmWHZOk
 
 Mark Hamill as the Witcher: https://www.youtube.com/watch?v=dLD9HbUU7Mo
 
-![Mark Hamill as the Witcher][image]
-[image]: https://img.youtube.com/vi/dLD9HbUU7Mo/0.jpg "Mark Hamill as the Witcher"
-
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=dLD9HbUU7Mo" target="_blank">
  <img src="https://img.youtube.com/vi/dLD9HbUU7Mo/0.jpg" alt="Mark Hamill as the Witcher" width="240" height="180" border="10" />
 </a>
