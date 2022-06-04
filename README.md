@@ -21,3 +21,5 @@ Mark Hamill as the Witcher Vesemir: https://www.youtube.com/watch?v=dLD9HbUU7Mo
  <img src="https://img.youtube.com/vi/dLD9HbUU7Mo/0.jpg" alt="Mark Hamill as the Witcher Vesemir" width="360" height="270" border="10" />
 </a>
 
+Using a NVidia 980ti 6GB video card
+
