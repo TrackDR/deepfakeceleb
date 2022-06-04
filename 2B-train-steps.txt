@@ -9,4 +9,27 @@ train 100K iterations
 
 7) delete inter_AB.npy and train 100K more iterations (repeat a few times)
 
-8) Copy model folder to new folder model-train-numtrainiters 
+8) Copy model folder to new folder model-train-numtrainiters
+
+9) train SAEHD.txt - random warp off, train 100K*n, deleting inter_AB.npy, saving model folder
+10) train SAEHD.txt - gan 0.1, gan_dims:32, , train 100K*n, deleting inter_AB.npy, saving model folder
+
+11) merge SAEHD.bat
+interactive merger - n, maybe y
+mode - (1) overlay
+mask mode (4) learned-prd*learned-dst
+color transfer mode: rct
+
+interactive:
+uses erode_mask (w) and blur_mask (e)
+color-transfer mode mix-m
+sharpen_mode: gaussian
+blursharpen_amount: 1
+erode_mask_modifier: 13
+blur_mask_modifier: 80
+motion_blur_power: 8
+
+Check merged pngs
+
+8) merged to .mp4 
+Play merged .mp4 file
