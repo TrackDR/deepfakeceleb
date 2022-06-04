@@ -1,0 +1,35 @@
+Using DeepFaceLab_NVIDIA_up_to_RTX2080Ti_11_20_2021 + DeepFaceLab git 2022-05-04-0d19d8e
+The caching GPU kernels part takes a WHILE for the 1st time.
+
+Play data_src.mp4
+Play data_dst.mp4
+2) extract images from video data_src.bat
+Check data_src frames
+3) extract images from video data_dst FULL FPS.bat
+Check data_dst frames
+
+5) data_dst faceset extract.bat [wf]
+5.1) data_dst view aligned results.bat
+5.1) data_dst view aligned debug results.bat
+
+5.Xseg Generic - data_dst whole face mask - apply
+5.XSeg) data_dst mask - edit 
+
+4) data_src faceset extract.bat [wf]
+Let's use "wf" - whole face
+4.1) data_src view aligned result.bat
+
+5.Xseg Generic - data_src whole face mask - apply
+5.XSeg) data_src mask - edit 
+
+Windows 10: https://i.imgur.com/B7cmDCB.jpg
+System-Display-Graphics Settings
+Hardware-accelerated GPU scheduling to On
+
+6) train SAEHD.bat
+change f to wf, use model options in pretraining-model-summary.txt
+p - update
+train 100K iterations 
+
+7) delete inter_AB.npy and train 100K more iterations
+
