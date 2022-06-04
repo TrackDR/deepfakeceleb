@@ -11,9 +11,9 @@ train 100K iterations
 
 8) Copy model folder to new folder model-train-numtrainiters
 
-9) train SAEHD.txt - random warp off, train 100K*n, deleting inter_AB.npy, saving model folder
-10) train SAEHD.txt - gan 0.1, gan_dims:32, , train 100K*n, deleting inter_AB.npy, saving model folder
-// could try lr_dropout to true if desired in 9 & 10
+9)  train SAEHD.txt - learning_rate dropout to true, train 100K*n, deleting inter_AB.npy, saving model folder
+10) train SAEHD.txt - random warp off, train 100K*n, deleting inter_AB.npy, saving model folder
+11) train SAEHD.txt - gan 0.1, gan_dims:32, , train 100K*n, deleting inter_AB.npy, saving model folder
 
 11) merge SAEHD.bat
 interactive merger - n, maybe y
