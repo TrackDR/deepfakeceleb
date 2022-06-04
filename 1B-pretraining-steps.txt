@@ -31,5 +31,7 @@ change f to wf, use model options in pretraining-model-summary.txt
 p - update
 train 100K iterations 
 
-7) delete inter_AB.npy and train 100K more iterations
+7) delete inter_AB.npy and train 100K more iterations (repeat a few times)
+
+8) Copy model folder to new folder model-pretrain-numpretrainiters 
 
