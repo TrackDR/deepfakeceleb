@@ -6,7 +6,7 @@ Deepfake playlist of mine: https://www.youtube.com/playlist?list=PLc7mKAo-647FUC
 Deepfake Elon Musk has a very special set of skills: https://www.youtube.com/watch?v=b7EKEWxY6QI
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=b7EKEWxY6QI" target="_blank">
- <img src="https://img.youtube.com/vi/b7EKEWxY6QI/0.jpg" alt="Deepfake Elon Musk has a very special set of skills" width="240" height="180" border="10" />
+ <img src="https://img.youtube.com/vi/b7EKEWxY6QI/0.jpg" alt="Deepfake Elon Musk has a very special set of skills" width="360" height="270" border="10" />
 </a>
 
 Robert Downey Jr. as Elon Musk: https://www.youtube.com/watch?v=ftOwCmWHZOk
