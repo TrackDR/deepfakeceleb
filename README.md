@@ -1,4 +1,4 @@
-# deepfakeceleb
+# deepfakeceleb (Using a NVidia 980ti 6GB video card)
 Support files for https://www.tiktok.com/@deepfakeceleb
 
 Deepfake playlist of mine: https://www.youtube.com/playlist?list=PLc7mKAo-647FUCpUUsP7fd9uT2nb-6f5S
@@ -21,5 +21,5 @@ Mark Hamill as the Witcher Vesemir: https://www.youtube.com/watch?v=dLD9HbUU7Mo
  <img src="https://img.youtube.com/vi/dLD9HbUU7Mo/0.jpg" alt="Mark Hamill as the Witcher Vesemir" width="360" height="270" border="10" />
 </a>
 
-Using a NVidia 980ti 6GB video card
+
 
