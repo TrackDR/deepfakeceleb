@@ -1,0 +1,47 @@
+=================== Model Summary ====================
+==                                                  ==
+==            Model name: new_SAEHD                 ==
+==                                                  ==
+==     Current iteration: 0                         ==
+==                                                  ==
+==----------------- Model Options ------------------==
+==                                                  ==
+==            resolution: 224                       ==
+==             face_type: wf                        ==
+==     models_opt_on_gpu: True                      ==
+==                 archi: liae-udt                  ==
+==               ae_dims: 256                       ==
+==                e_dims: 64                        ==
+==                d_dims: 64                        ==
+==           d_mask_dims: 22                        ==
+==       masked_training: True                      ==
+==       eyes_mouth_prio: True                      ==
+==           uniform_yaw: True                      ==
+==         blur_out_mask: True                      ==
+==             adabelief: False                     ==
+==            lr_dropout: n                         ==
+==           random_warp: False                     ==
+==      random_hsv_power: 0.0                       ==
+==       true_face_power: 0.0                       ==
+==      face_style_power: 0.0                       ==
+==        bg_style_power: 0.0                       ==
+==               ct_mode: none                      ==
+==              clipgrad: False                     ==
+==              pretrain: True                      ==
+==       autobackup_hour: 0                         ==
+== write_preview_history: False                     ==
+==           target_iter: 100000                    ==
+==       random_src_flip: False                     ==
+==       random_dst_flip: True                      ==
+==            batch_size: 8                         ==
+==             gan_power: 0.0                       ==
+==        gan_patch_size: 28                        ==
+==              gan_dims: 16                        ==
+==                                                  ==
+==------------------- Running On -------------------==
+==                                                  ==
+==          Device index: 0                         ==
+==                  Name: NVIDIA GeForce GTX 980 Ti ==
+==                  VRAM: 4.75GB                    ==
+==                                                  ==
+======================================================
