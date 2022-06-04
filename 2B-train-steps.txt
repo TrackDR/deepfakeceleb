@@ -1,0 +1,12 @@
+Using DeepFaceLab_NVIDIA_up_to_RTX2080Ti_11_20_2021 + DeepFaceLab git 2022-05-04-0d19d8e
+The caching GPU kernels part takes a WHILE for the 1st time.
+
+6) train SAEHD.bat
+set pre-train to off
+change f to wf, use model options in train-model-summary.txt
+p - update
+train 100K iterations 
+
+7) delete inter_AB.npy and train 100K more iterations (repeat a few times)
+
+8) Copy model folder to new folder model-train-numtrainiters 
