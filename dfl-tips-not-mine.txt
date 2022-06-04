@@ -1,0 +1,241 @@
+I want to swap my face to a particular celebrity. What I need to do?
+-----------------------------------------------------------------------
+Gather 5000+ samples of your face with various conditions using webcam which will be used for Live. 
+The conditions are as follows: different lighting, different facial expressions, head direction, eyes direction, being far or closer to the camera, etc. Sort faceset by best to 2000.
+
+Using SAEHD model.
+
+res:224, WF, archi:liae-udt, ae_dims:512, e_dims:64, d_dims:64, d_mask_dims:32, eyes_mouth_prio:Y, blur_out_mask:Y, uniform_yaw:Y, lr_dropout:Y, random_hsv_power:0.1, batch:8. Others by default.
+
+Make a backup before every stage !
+
+train +500.000 with RTM WF faceset from the torrent as dst, deleting inter_AB.npy every 100k (save, delete, continue run)
+
+train +500.000
+
+place your faceset to dst
+
+do not delete anything, continue train +500.000
+
+random_warp:OFF, train +500.000
+
+enable gan 0.1 gan_dims:32, train +300.000
+
+export the model in .dfm format for use in DeepFaceLive. You can also try ordering a deepfake model from someone in Discord or forum.
+----------------------------------------------------------------------
+I want to train ready-to-use face model to swap any face to celebrity. What I need to do?
+If you are familiar with DeepFaceLab, then this tutorial will help you:
+
+Src faceset is celebrity. Must be diverse enough in yaw, light and shadow conditions. Src faceset should be xseg'ed and applied. You can apply Generic XSeg to src faceset.
+
+Dst faceset is RTM WF faceset from the torrent.
+
+Using SAEHD model.
+
+res:224, WF, archi:liae-udt, ae_dims:512, e_dims:64, d_dims:64, d_mask_dims:32, eyes_mouth_prio:Y, blur_out_mask:Y, uniform_yaw:Y, lr_dropout:Y, batch:8. Others by default.
+
+Make a backup before every stage !
+
+train +2.000.000 iters with RTM WF faceset from the torrent as dst, deleting inter_AB.npy every 500k (save, delete, continue run)
+
+random_warp still ON, train +500.000
+
+if swapped face looks more like dst, delete inter_AB, repeat from stage 2
+
+random_warp:OFF, train +500.000
+
+enable gan 0.1 gan_dims:32, train +800.000
+
+reusing trained SAEHD RTM model
+
+Models that are trained without random_warp:OFF (before stage 4), can be reused. 
+In this case you have to delete INTER_AB.NPY from the model folder and continue training from stage 2. 
+Increase stage 2 up to 2.000.000 and more iters. You can delete inter_AB.npy every 500.000 iters to increase src-likeness. 
+Trained model before random_warp:OFF also can be reused for new celeb face.
+
+---------------------------------------------
+I want to change some code and test the result on my local machine. What I need to do?
+There is ready-to-use VSCode editor inside DeepFaceLive folder located in
+
+_internal\vscode.bat
+
+All code changes will only affect the current folder.
+
+Also you can build a new and clean DeepFaceLive folder with the code from current folder using
+
+_internal\build DeepFaceLive.bat
+----------------------------------------
+https://mrdeepfakes.com/forums/thread-guide-deepfacelab-2-0-guide?pid=18459#pid18459
+
+My advices, translated using deepl.com
+
+SAEHD model options.
+
+Random_flip
+Turn the image from left to right by random rotation. Allows for better generalization of faces. Slows down training slightly until a clear face is achieved. If both src and dst face sets are quite diverse, this option is not useful. You can turn it off after a workout.
+
+Batch_size
+Improves facial generalization, especially useful at an early stage. But it increases the time until a clear face is achieved. Increases memory usage. In terms of quality of the final fairy, the higher the value, the better. It's not worth putting it below 4.
+
+Resolution.
+At first glance, the more the better. However, if the face in the frame is small, there is no point in choosing a large resolution. By increasing the resolution, the training time increases. For face_type=wf, more resolution is required, because the coverage of the face is larger, thus the details of the face are reduced. For wf it makes no sense to choose less than 224.
+
+Face_type.
+Face coverage in training. The more facial area is covered, the more plausible the result will be.
+The whole_face allows covering the area below the chin and forehead. However, there is no automatic removal of the mask with the forehead, so XSeg is required for the merge, either in Davinci Resolve or Adobe After Effects.
+
+Archi.
+Liae makes more morph under dst face, but src face in it will still be recognized.
+Df allows you to make the most believable face, but requires more manual work to collect a good variety of src facets and a final color matching.
+The effectiveness of hd architectures has not been proven at this time. The Hd architectures were designed to better smooth the subpixel transition of the face at micro displacements, but the micro shake is also eliminated at df, see below.
+
+Ae_dims.
+Dimensions of the main brain of the network, which is responsible for generating facial expressions created in the encoder and for supplying a variety of code to the decoder. 
+
+E_dims.
+The dimensions of the encoder network that are responsible for face detection and further recognition. When these dimensions are not enough, and the facial chips are too diverse, then we have to sacrifice non-standard cases, those that are as much as possible different from the general cases, thus reducing their quality.
+
+D_dims.
+The network dimensions of the decoder, which are responsible for generating the image from the code obtained from the brain of the network. When these dimensions are not enough, and the weekend faces are too different in color, lighting, etc., you have to sacrifice the maximum allowed sharpness.
+
+D_mask_dims.
+Dimensions of the mask decoder network, which are responsible for forming the mask image. 
+16-22 is the normal value for a fake without an edited mask in XSeg editor.
+
+At the moment there is no experimentally proven data that would indicate which values are better. All we know is that if you put really low values, the error curve will reach the plateau quickly enough and the face will not reach clarity.
+
+Masked_training. (only for whole_face).
+Enabled (default) - trains only the area inside the face mask, and anything outside that area is ignored. Allows the net to focus on the face only, thus speeding up facial training and facial expressions. 
+When the face is sufficiently trained, you can disable this option, then everything outside the face - the forehead, part of the hair, background - will be trained.
+
+Eyes_prio.
+Set a higher priority for image reconstruction in the eye area. Thus improving the generalization and comparison of the eyes of two faces. Increases iteration time.
+
+Lr_dropout.
+Include only when the face is already sufficiently trained. Enhance facial detail and improve subpixel facial transitions to reduce shake.
+Spends more video memory. So when selecting a network configuration for your graphics card, consider enabling this option.
+
+Random_warp.
+Turn it off only when your face is already sufficiently trained. Allows you to improve facial detail and subpixel transitions of facial features, reducing shake.
+
+GAN_power. 
+Allows for improved facial detail. Include only when the face is already sufficiently trained. Requires more memory, greatly increases iteration time.  
+The work is based on the generative and adversarial principle. At first, you will see artifacts in areas that do not match the clarity of the target image, such as teeth, eye edges, etc. So train long enough. 
+
+True_face_power.
+Experimental option. You don't have to turn it on. Adjusts the predicted face to src in the most "hard way". Artifacts and incorrect light transfer from dst may appear.
+
+Face_style_power.
+
+Adjusts the color distribution of the predicted face in the area inside the mask to dst. Artefacts may appear. The face may become more like dst. The model may collapse.
+Start at 0.0001 and watch the changes in preview_history, turn on the backup every hour.
+
+Bg_style_power.
+
+Trains the area in the predicted face outside the face mask to be equal to the same area in the dst face. In this way the predicted face is similar to the morph in dst face with already less recognizable facial src features. 
+
+The Face_style_power and Bg_style_power must work in pairs to make the complexion fit to dst and the background take from dst. Morph allows you to get rid of many problems with color and face matching, but at the expense of recognition in it src face.
+
+ct_mode.
+
+It is used to fit the average color distribution of a face set src to dst. Unlike Face_style_power is a safer way, but not the fact that you get an identical color transfer. Try each one, look at the preview history which one is closer to dst and train on it.
+
+Clipgrad. 
+
+It reduces the chance of a model collapse to almost zero. Model collapse occurs when artifacts appear or when the windows of the predicted faces are colored in the same color. Model collapse can occur when using some options or when there is not enough variety of face sets dst.
+Therefore, it is best to use autobackup every 2-4 hours, and if collapse occurs, roll back and turn on clipgrad. .
+
+Pretrain. 
+
+Engage model pre-training. Performed by 24 thousand people prepared in advance. Using the pre-trained model you accelerate the training of any fairy. 
+It is recommended to train as long as possible. 1-2 days is good. 2 weeks is perfect. At the end of the pre-training, save the model files for later use. Switch off the option and train as usual.
+You can and should share your pre-trained model in the community.
+
+Size of src and dst face set.
+
+The problem with a large number of src images is repetitive faces, which will play little role. Therefore, faces with rare angles will train less frequently, which has a bad effect on quality. Therefore, 3000-4000 faces are optimal for src facial recruitment. If you have more than 5000 faces, sort by best into fewer faces. Sorting will select from the optimal ratio of angles and color variety.
+
+The same logic is true for dst. But dst is footage from video, each of which must be well trained to be identified by the neural network when it is closer. So if you have too many faces in dst, from 3000 and more, it is optimal to make their backup, then sort by best in 3000, train the network to say 100.000 iterations, then return the original number of dst faces and train further until the optimal result is achieved. 
+
+How to get lighting similar to dst face?
+
+It's about lighting, not color matching. It's just about collecting a more diverse src set of faces.
+
+
+How to suppress color flickering in DF model? 
+
+If the src set of faces contains a variety of make-up, it can lead to color shimmering DF model. Option: At the end of your training, leave at least 150 faces of the same makeup and train for several hours.
+
+How else can you adjust the color of the predicted face to dst?
+
+If nothing fits automatically, use the video editor and glue the faces in it. With the video editor, you get a lot more freedom to note colors.
+
+How to make a face look more like src? 
+
+1. Use DF architecture. 
+
+2. Use a similar face shape in dst.
+
+3 It is known that a large color variety of facial src decreases facial resemblance, because a neural network essentially interpolates the face from what it has seen.
+
+For example, in your src set of faces from 7 different color scenes, and the sum of faces is only 1500, so under each dst scene will be used 1500 / 7 faces, which is 7 times poorer than if you use 1500 faces of one scene. As a result, the predicted face will be very different from the src. 
+
+Microquake the predicted face in the end video. 
+
+The higher the resolution of the model, the longer it needs to be trained to suppress the micro-shake.
+You should also enable lr_dropout and disable random_warp after 200-300k iterations at batch_size 8.
+It is not rare that the microshake can appear if the dst video is too clear. It is difficult for a neural network to distinguish unambiguous information about a face when it is overflowed with micro-pixel noise. Therefore, after extracting frames from dst video, before extracting faces, you can pass through the frames with the noise filter denoise data_dst images.bat. This filter will remove temporal noise.
+Also, ae_dims magnification may suppress the microshock.
+
+Use a quick model to check the generalization of facial features. 
+
+If you're thinking of a higher resolution fake, start by running at least a few hours at resolution 96. This will help identify facial generalization problems and correct facial sets. 
+Examples of such problems: 
+
+1. Non-closing eyes/mouth - no closed eyes/mouth in src.
+
+2. wrong face rotation - not enough faces with different turns in both src and dst face sets.
+
+Training algorithm for achieving high definition.
+1. use -ud model
+2. train, say, up to 300k.
+3. enable learning rate dropout for 100k 
+4. disable random warp for 50k.
+5. enable gan
+
+Do not use training GPU for video output.
+
+This can reduce performance, reduce the amount of free GPU video memory, and in some cases lead to OOM errors.
+Buy a second cheap video card such as GT 730 or a similar, use it for video output.
+There is also an option to use the built-in GPU in Intel processors. To do this, activate it in BIOS, install drivers, connect the monitor to the motherboard.
+
+Using Multi-GPU. 
+
+Multi-GPU can improve the quality of the fake. In some cases, it can also accelerate training. 
+Choose identical GPU models, otherwise the fast model will wait for the slow model, thus you will not get the acceleration.
+Working Principle: batch_size is divided into each GPU. Accordingly, you either get the acceleration due to the fact that less work is allocated to each GPU, or you increase batch_size by the number of GPUs, increasing the quality of the fairy.
+In some cases, disabling the model_opts_on_gpu can speed up your training when using 4 or more GPUs.
+As the number of samples increases, the load on the CPU to generate samples increases. Therefore it is recommended to use the latest generation CPU and memory.
+
+NVLink, SLI mot working and not used. Moreover, the SLI enabled may cause errors.
+
+Factors that reduce fairy success. 
+1. Big face in the frame.
+
+2. Side lights. Transitions lighting. Color lighting.
+
+3. not a diverse set of dst faces. 
+
+For example, you train a faceake, where the whole set of dst faces is a one-way turned head. Generating faces in this case can be bad. The solution: extract additional faces of the same actor, train them well enough, then leave only the target faces in dst.
+
+Factors that increase the success of the fairy.
+
+1. Variety of src faces: different angles including side faces. Variety of lighting.
+
+Other.
+
+In 2018, when fairies first appeared, people liked any lousy quality of fairies, where the face glimpsed, and was barely like a target celebrity. Now, even in a technically perfect replacement using a parodist similar to the target celebrity, the viral video effect may not be present at all. Popular youtube channels specializing in dipfeikas are constantly inventing something new to keep the audience. If you have watched and watched a lot of movies, know all the memo videos, you can probably come up with great ideas for dipfeik. A good idea is 50% success. The technical quality can be increased through practice.
+
+Not all celebrity couples can be well used for a dipfeike. If the size of the skulls is significantly different, the similarity of the result will be extremely low. With experience dipfeik should understand what will be good fairies and what not.
+
+
